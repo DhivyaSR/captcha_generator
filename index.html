@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Captcha Generator</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .container{
+            background-color: rgb(212, 203, 203);
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .box{
+            width: 25%;
+            height: 10%;
+            background-color: white;
+            border-radius: 10px;
+            padding: 5vw;
+        }
+        .captcha_text{
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 34px;
+            font-weight: bold;
+        }
+        .input_fields input{
+            width: 70%;
+            padding: 5px;
+        }
+        .input_fields button{
+            width: 24%;
+            padding: 7px;
+            background-color: green;
+            border: none;
+            border-radius: 3px;
+            color: white;
+        }
+        .input_fields button:hover{
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="box">
+            <div class="captcha_text">EqFtlz</div>
+            <div class="input_fields">
+                <input type="text" name="captcha_input" id="captcha_input">
+                <button id="verify_captcha">Verify</button>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        var captcha_text = document.querySelector('.captcha_text');
+        var captcha_input = document.querySelector('#captcha_input');
+        var captcha_verifier = document.querySelector('#verify_captcha');
+        captcha_verifier.addEventListener("click",function(){
+            if(captcha_text.textContent == captcha_input.value){
+                alert("CAPTCHA Verified Successfully");
+            }else{
+                alert("CAPTCHA Verification Failed. Please Try Again");
+            }
+            captcha_input.value = "";
+            captcha_input.focus();
+            randomString = generateString(6);
+            captcha_text.textContent = randomString.trim();
+        });
+
+        function generateString(length) {
+            const characters ='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+            let result = ' ';
+            const charactersLength = characters.length;
+            for ( let i = 0; i < length; i++ ) {
+                result += characters.charAt(Math.floor(Math.random() * charactersLength));
+            }
+
+            return result;
+        }
+
+
+    </script>
+</body>
+</html>
